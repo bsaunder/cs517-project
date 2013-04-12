@@ -146,7 +146,7 @@ public class ServiceApi {
      */
     @GET
     @Path("get")
-    public Response updateService(final Integer resourceId) {
+    public Response getService(final Integer resourceId) {
         Response response;
 
         try {

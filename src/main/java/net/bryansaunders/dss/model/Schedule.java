@@ -1,5 +1,5 @@
 package net.bryansaunders.dss.model;
 
-public class Schedule {
+public class Schedule extends BaseEntity {
 	// TODO Implement Model
 }

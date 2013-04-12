@@ -1,5 +1,5 @@
 package net.bryansaunders.dss.model;
 
-public class Staff {
+public class Staff extends BaseEntity {
 	// TODO Implement Model
 }
