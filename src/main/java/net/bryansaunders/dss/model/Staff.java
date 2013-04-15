@@ -3,7 +3,6 @@ package net.bryansaunders.dss.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.mail.Address;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -13,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 
 import net.bryansaunders.dss.model.constraint.PhoneNumber;
+import net.bryansaunders.dss.model.embeddable.Address;
 import net.bryansaunders.dss.model.embeddable.Unavailability;
 
 import org.hibernate.annotations.LazyCollection;

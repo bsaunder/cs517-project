@@ -3,8 +3,13 @@
  */
 package net.bryansaunders.dss.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import net.bryansaunders.dss.model.enumerator.TrainingType;
 
@@ -36,6 +41,13 @@ public class Training extends Service {
 	private TrainingType type;
 
 	/**
+	 * Course Instructors.
+	 */
+	@Size(min = 1)
+	@OneToMany
+	private List<Staff> staff = new LinkedList<Staff>();
+
+	/**
 	 * Get the courseNumber.
 	 * 
 	 * @return the courseNumber
@@ -47,7 +59,8 @@ public class Training extends Service {
 	/**
 	 * Set the courseNumber.
 	 * 
-	 * @param courseNumber the courseNumber to set
+	 * @param courseNumber
+	 *            the courseNumber to set
 	 */
 	public void setCourseNumber(Integer courseNumber) {
 		this.courseNumber = courseNumber;
@@ -65,7 +78,8 @@ public class Training extends Service {
 	/**
 	 * Set the courseName.
 	 * 
-	 * @param courseName the courseName to set
+	 * @param courseName
+	 *            the courseName to set
 	 */
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
@@ -83,9 +97,30 @@ public class Training extends Service {
 	/**
 	 * Set the type.
 	 * 
-	 * @param type the type to set
+	 * @param type
+	 *            the type to set
 	 */
 	public void setType(TrainingType type) {
 		this.type = type;
 	}
+
+	/**
+	 * Get the staff.
+	 * 
+	 * @return the staff
+	 */
+	public List<Staff> getStaff() {
+		return this.staff;
+	}
+
+	/**
+	 * Set the staff.
+	 * 
+	 * @param staff
+	 *            the staff to set
+	 */
+	public void setStaff(List<Staff> staff) {
+		this.staff = staff;
+	}
+
 }

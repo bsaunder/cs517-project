@@ -3,6 +3,7 @@
  */
 package net.bryansaunders.dss.model.embeddable;
 
+import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
 import net.bryansaunders.dss.model.constraint.ZipCode;
@@ -13,6 +14,7 @@ import net.bryansaunders.dss.model.constraint.ZipCode;
  * @author Bryan Saunders <btsaunde@gmail.com>
  * 
  */
+@Embeddable
 public class Address {
 
 	/**

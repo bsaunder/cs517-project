@@ -11,6 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -34,6 +36,13 @@ public class Charter extends Service {
 	private List<String> siteNames = new LinkedList<String>();
 
 	/**
+	 * Charter Staff.
+	 */
+	@Size(min = 3, max = 3)
+	@OneToMany
+	private List<Staff> staff;
+
+	/**
 	 * Get the siteNames.
 	 * 
 	 * @return the siteNames
@@ -50,6 +59,25 @@ public class Charter extends Service {
 	 */
 	public void setSiteNames(List<String> siteNames) {
 		this.siteNames = siteNames;
+	}
+
+	/**
+	 * Get the staff.
+	 * 
+	 * @return the staff
+	 */
+	public List<Staff> getStaff() {
+		return this.staff;
+	}
+
+	/**
+	 * Set the staff.
+	 * 
+	 * @param staff
+	 *            the staff to set
+	 */
+	public void setStaff(List<Staff> staff) {
+		this.staff = staff;
 	}
 
 }
