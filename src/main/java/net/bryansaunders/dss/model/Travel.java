@@ -30,6 +30,7 @@ public class Travel extends Service {
 	 */
 	@Size(min = 1)
 	@OneToMany
+	// TODO Has Instructor Constraint
 	private List<Staff> staff;
 
 	/**

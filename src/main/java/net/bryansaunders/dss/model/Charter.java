@@ -12,6 +12,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
@@ -40,7 +42,17 @@ public class Charter extends Service {
 	 */
 	@Size(min = 3, max = 3)
 	@OneToMany
+	// TODO Has Instructor Constraint
+	// TODO Has Captain Constraint
+	// TODO Has DiveMaster Constraint
 	private List<Staff> staff;
+
+	/**
+	 * Charter Boat.
+	 */
+	@NotNull
+	@OneToOne
+	private Boat boat;
 
 	/**
 	 * Get the siteNames.
@@ -78,6 +90,25 @@ public class Charter extends Service {
 	 */
 	public void setStaff(List<Staff> staff) {
 		this.staff = staff;
+	}
+
+	/**
+	 * Get the boat.
+	 * 
+	 * @return the boat
+	 */
+	public Boat getBoat() {
+		return this.boat;
+	}
+
+	/**
+	 * Set the boat.
+	 * 
+	 * @param boat
+	 *            the boat to set
+	 */
+	public void setBoat(Boat boat) {
+		this.boat = boat;
 	}
 
 }
