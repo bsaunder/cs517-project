@@ -144,7 +144,7 @@ public class ServiceApi {
      *            ID of Service to Get
      * @return Service
      */
-    @GET
+    @POST
     @Path("get")
     public Response getService(final Integer resourceId) {
         Response response;

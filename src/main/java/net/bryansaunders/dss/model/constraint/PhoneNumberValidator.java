@@ -3,7 +3,8 @@
  */
 package net.bryansaunders.dss.model.constraint;
 
-import java.util.regex.PatternSyntaxException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,7 +14,8 @@ import net.bryansaunders.dss.dao.GenericDaoImpl;
 import org.jboss.logging.Logger;
 
 /**
- * Phone Number Constraint Validator. A Phone Number is Defined as any String that matched the Regular Expression: {@value #PHONE_REGEX}.
+ * Phone Number Constraint Validator. A Phone Number is Defined as any String
+ * that matched the Regular Expression: {@value #PHONE_REGEX}.
  * 
  * @author Bryan Saunders <btsaunde@gmail.com>
  * 
@@ -38,14 +40,19 @@ public class PhoneNumberValidator implements
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean isValid(String object,
+	public boolean isValid(String value,
 			ConstraintValidatorContext constraintContext) {
+		this.logger.debug("Validating Phone Number: " + value);
 		boolean isValid = false;
 
-		try {
-			isValid = object.matches(PhoneNumberValidator.PHONE_REGEX);
-		} catch (PatternSyntaxException ex) {
-			this.logger.error(ex);
+		if (value == null) {
+			isValid = false;
+		} else {
+			final Pattern pattern = Pattern
+					.compile(PhoneNumberValidator.PHONE_REGEX);
+			final Matcher matcher = pattern.matcher(value);
+
+			isValid = matcher.matches();
 		}
 
 		return isValid;

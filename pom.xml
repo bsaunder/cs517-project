@@ -179,6 +179,25 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<!-- Enunciate -->
+			<plugin>
+				<groupId>org.codehaus.enunciate</groupId>
+				<artifactId>maven-enunciate-plugin</artifactId>
+				<version>1.25</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>docs</goal>
+						</goals>
+						<configuration>
+							<docsDir>${project.build.directory}/enunciate</docsDir>
+							<configFile>enunciate.xml</configFile>
+							<indexPageName>enunciate.html</indexPageName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
 		</plugins>
 	</build>

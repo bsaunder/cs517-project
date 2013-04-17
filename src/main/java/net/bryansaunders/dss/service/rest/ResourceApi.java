@@ -144,7 +144,7 @@ public class ResourceApi {
      *            ID of Resource to Get
      * @return Resource
      */
-    @GET
+    @POST
     @Path("get")
     public Response getResource(final Integer resourceId) {
         Response response;

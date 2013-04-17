@@ -9,7 +9,7 @@ import javax.ws.rs.core.Application;
  * @author Bryan Saunders <btsaunde@gmail.com>
  * 
  */
-@ApplicationPath("/REST")
+@ApplicationPath("/rest")
 public class RestApi extends Application {
 
     /**

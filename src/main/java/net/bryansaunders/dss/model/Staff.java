@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import net.bryansaunders.dss.model.constraint.PhoneNumber;
@@ -59,6 +61,7 @@ public abstract class Staff extends BaseEntity {
 	 * Mailing Address.
 	 */
 	@NotNull
+	@Embedded
 	private Address address;
 
 	/**

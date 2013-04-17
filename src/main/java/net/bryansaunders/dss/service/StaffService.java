@@ -12,7 +12,9 @@ import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 
 import net.bryansaunders.dss.dao.StaffDao;
+import net.bryansaunders.dss.model.ShopKeeper;
 import net.bryansaunders.dss.model.Staff;
+import net.bryansaunders.dss.model.embeddable.Address;
 
 import org.jboss.logging.Logger;
 
@@ -55,7 +57,7 @@ public class StaffService {
 		Staff savedStaff = null;
 
 		try {
-			this.dao.save(staff);
+			savedStaff = this.dao.save(staff);
 		} catch (ConstraintViolationException e) {
 			this.context.setRollbackOnly();
 			throw e;
@@ -98,5 +100,27 @@ public class StaffService {
 		this.logger.trace("StaffService.delete()");
 		
 		this.dao.delete(staffId);
+	}
+
+	/**
+	 * Creates a Test ShopKeeper.
+	 */
+	// TODO Remove Test Method
+	public void createTest() {
+		ShopKeeper staff = new ShopKeeper();
+		staff.setName("Test" + Math.random());
+		staff.setHomePhone("843-555-5567");
+		staff.setCellPhone("843-555-5568");
+		staff.setEmail("joe@smith.com");
+		
+		Address address = new Address();
+		address.setCity("Charleston");
+		address.setState("SC");
+		address.setLine1("123 Main Street");
+		address.setLine2("Unit 5");
+		address.setZip("12345");
+		staff.setAddress(address);
+		
+		this.dao.save(staff);
 	}
 }

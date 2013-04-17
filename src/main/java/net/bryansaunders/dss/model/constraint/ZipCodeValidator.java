@@ -3,7 +3,8 @@
  */
 package net.bryansaunders.dss.model.constraint;
 
-import java.util.regex.PatternSyntaxException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -38,14 +39,18 @@ public class ZipCodeValidator implements ConstraintValidator<ZipCode, String> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean isValid(String object,
+	public boolean isValid(String value,
 			ConstraintValidatorContext constraintContext) {
+		this.logger.debug("Validating Zip Code: " + value);
 		boolean isValid = false;
 
-		try {
-			isValid = object.matches(ZipCodeValidator.ZIP_REGEX);
-		} catch (PatternSyntaxException ex) {
-			this.logger.error(ex);
+		if (value == null) {
+			isValid = false;
+		} else {
+			final Pattern pattern = Pattern.compile(ZipCodeValidator.ZIP_REGEX);
+			final Matcher matcher = pattern.matcher(value);
+
+			isValid = matcher.matches();
 		}
 
 		return isValid;

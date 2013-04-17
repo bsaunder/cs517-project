@@ -14,11 +14,17 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import net.bryansaunders.dss.model.Captain;
+import net.bryansaunders.dss.model.DiveMaster;
+import net.bryansaunders.dss.model.Instructor;
+import net.bryansaunders.dss.model.ShopKeeper;
 import net.bryansaunders.dss.model.Staff;
+import net.bryansaunders.dss.model.Technician;
 import net.bryansaunders.dss.service.StaffService;
 
 import org.jboss.logging.Logger;
@@ -47,6 +53,96 @@ public class StaffApi {
 	private StaffService staffService;
 
 	/**
+	 * Adds ShopKeeper.
+	 * 
+	 * <ul>
+	 * <li>Status 201: Successful ShopKeeper Creation.</li>
+	 * <li>Status 400: Error Adding ShopKeeper.</li>
+	 * </ul>
+	 * 
+	 * @param shopKeeper
+	 *            ShopKeeper to Add
+	 * @return Saved ShopKeeper
+	 */
+	@POST
+	@Path("add/shopkeeper")
+	public Response addShopKeeper(final ShopKeeper shopKeeper) {
+		return saveStaff(shopKeeper);
+	}
+
+	/**
+	 * Adds DiveMaster.
+	 * 
+	 * <ul>
+	 * <li>Status 201: Successful DiveMaster Creation.</li>
+	 * <li>Status 400: Error Adding DiveMaster.</li>
+	 * </ul>
+	 * 
+	 * @param diveMaster
+	 *            DiveMaster to Add
+	 * @return Saved DiveMaster
+	 */
+	@POST
+	@Path("add/diveMaster")
+	public Response addDiveMaster(final DiveMaster diveMaster) {
+		return saveStaff(diveMaster);
+	}
+
+	/**
+	 * Adds Instructor.
+	 * 
+	 * <ul>
+	 * <li>Status 201: Successful Instructor Creation.</li>
+	 * <li>Status 400: Error Adding Instructor.</li>
+	 * </ul>
+	 * 
+	 * @param instructor
+	 *            Instructor to Add
+	 * @return Saved Instructor
+	 */
+	@POST
+	@Path("add/instructor")
+	public Response addInstructor(final Instructor instructor) {
+		return saveStaff(instructor);
+	}
+
+	/**
+	 * Adds Captain.
+	 * 
+	 * <ul>
+	 * <li>Status 201: Successful Captain Creation.</li>
+	 * <li>Status 400: Error Adding Captain.</li>
+	 * </ul>
+	 * 
+	 * @param captain
+	 *            Captain to Add
+	 * @return Saved Captain
+	 */
+	@POST
+	@Path("add/captain")
+	public Response addCaptain(final Captain captain) {
+		return saveStaff(captain);
+	}
+
+	/**
+	 * Adds Technician.
+	 * 
+	 * <ul>
+	 * <li>Status 201: Successful Technician Creation.</li>
+	 * <li>Status 400: Error Adding Technician.</li>
+	 * </ul>
+	 * 
+	 * @param tech
+	 *            Technician to Add
+	 * @return Saved Technician
+	 */
+	@POST
+	@Path("add/technician")
+	public Response addTechnician(final Technician tech) {
+		return saveStaff(tech);
+	}
+
+	/**
 	 * Adds Staff.
 	 * 
 	 * <ul>
@@ -58,9 +154,7 @@ public class StaffApi {
 	 *            Staff to Add
 	 * @return Saved Staff
 	 */
-	@POST
-	@Path("add")
-	public Response addStaff(final Staff staff) {
+	private Response saveStaff(final Staff staff) {
 		this.logger.trace("StaffApi.addStaff()");
 
 		Response response;
@@ -78,34 +172,93 @@ public class StaffApi {
 	}
 
 	/**
-	 * Edit Staff.
+	 * Updates ShopKeeper.
 	 * 
 	 * <ul>
-	 * <li>Status 200: Successful Staff Update.</li>
-	 * <li>Status 400: Error Updating Staff.</li>
+	 * <li>Status 201: Successful ShopKeeper Update.</li>
+	 * <li>Status 400: Error Updating ShopKeeper.</li>
 	 * </ul>
 	 * 
-	 * @param staff
-	 *            Staff to Edit
-	 * @return Updated Staff
+	 * @param shopKeeper
+	 *            ShopKeeper to Update
+	 * @return Saved ShopKeeper
 	 */
 	@PUT
-	@Path("update")
-	public Response updateStaff(final Staff staff) {
-		this.logger.trace("StaffApi.updateStaff()");
+	@Path("update/shopkeeper")
+	public Response updateShopKeeper(final ShopKeeper shopKeeper) {
+		return saveStaff(shopKeeper);
+	}
 
-		Response response;
+	/**
+	 * Updates DiveMaster.
+	 * 
+	 * <ul>
+	 * <li>Status 201: Successful DiveMaster Update.</li>
+	 * <li>Status 400: Error Updating DiveMaster.</li>
+	 * </ul>
+	 * 
+	 * @param diveMaster
+	 *            DiveMaster to Update
+	 * @return Saved DiveMaster
+	 */
+	@PUT
+	@Path("update/diveMaster")
+	public Response updateDiveMaster(final DiveMaster diveMaster) {
+		return saveStaff(diveMaster);
+	}
 
-		try {
-			Staff updatedStaff = this.staffService.save(staff);
-			response = Response.ok(updatedStaff).status(Response.Status.OK)
-					.build();
-		} catch (final EJBException e) {
-			response = Response.status(Response.Status.BAD_REQUEST)
-					.entity("JSON Invalid: " + e.getMessage()).build();
-		}
+	/**
+	 * Updates Instructor.
+	 * 
+	 * <ul>
+	 * <li>Status 201: Successful Instructor Update.</li>
+	 * <li>Status 400: Error Updating Instructor.</li>
+	 * </ul>
+	 * 
+	 * @param instructor
+	 *            Instructor to Update
+	 * @return Saved Instructor
+	 */
+	@PUT
+	@Path("update/instructor")
+	public Response updateInstructor(final Instructor instructor) {
+		return saveStaff(instructor);
+	}
 
-		return response;
+	/**
+	 * Updates Captain.
+	 * 
+	 * <ul>
+	 * <li>Status 201: Successful Captain Update.</li>
+	 * <li>Status 400: Error Updating Captain.</li>
+	 * </ul>
+	 * 
+	 * @param captain
+	 *            Captain to Update
+	 * @return Saved Captain
+	 */
+	@PUT
+	@Path("update/captain")
+	public Response updateCaptain(final Captain captain) {
+		return saveStaff(captain);
+	}
+
+	/**
+	 * Updates Technician.
+	 * 
+	 * <ul>
+	 * <li>Status 201: Successful Technician Update.</li>
+	 * <li>Status 400: Error Updating Technician.</li>
+	 * </ul>
+	 * 
+	 * @param tech
+	 *            Technician to Update
+	 * @return Saved Technician
+	 */
+	@PUT
+	@Path("update/technician")
+	public Response updateTechnician(final Technician tech) {
+		return saveStaff(tech);
 	}
 
 	/**
@@ -150,8 +303,8 @@ public class StaffApi {
 	 * @return Delete Result
 	 */
 	@DELETE
-	@Path("delete")
-	public Response deleteStaff(final Integer staffId) {
+	@Path("delete/{id}")
+	public Response deleteStaff(@PathParam("id") final Integer staffId) {
 		this.logger.trace("StaffApi.deleteStaff()");
 
 		Response response;
@@ -176,8 +329,8 @@ public class StaffApi {
 	 * @return Staff
 	 */
 	@GET
-	@Path("get")
-	public Response getStaff(final Integer staffId) {
+	@Path("get/{id}")
+	public Response getStaff(@PathParam("id") final Integer staffId) {
 		this.logger.trace("StaffApi.getStaff()");
 
 		Response response;
@@ -189,6 +342,24 @@ public class StaffApi {
 			response = Response.status(Response.Status.NOT_FOUND)
 					.entity("No Results Found").build();
 		}
+
+		return response;
+	}
+
+	/**
+	 * Creates a Test ShopKeeper.
+	 */
+	// TODO Remove Test Method
+	@GET
+	@Path("create")
+	public Response createTest() {
+		this.logger.trace("StaffApi.createTest()");
+
+		Response response;
+
+		// Does this need Error Handling If the ID Is Not Found?
+		this.staffService.createTest();
+		response = Response.ok().status(Response.Status.OK).build();
 
 		return response;
 	}
