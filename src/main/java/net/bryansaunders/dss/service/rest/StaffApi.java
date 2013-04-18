@@ -8,7 +8,6 @@ import java.util.List;
 import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -305,13 +304,8 @@ public class StaffApi {
 
 		Response response;
 
-		try {
-			this.staffService.delete(staffId);
-			response = Response.ok().status(Response.Status.OK).build();
-		} catch (NoResultException nre) {
-			response = Response.status(Response.Status.NOT_FOUND)
-					.entity("Entity Not Found").build();
-		}
+		this.staffService.delete(staffId);
+		response = Response.ok().status(Response.Status.OK).build();
 
 		return response;
 	}
@@ -335,13 +329,8 @@ public class StaffApi {
 
 		Response response;
 
-		try {
-			Staff staff = this.staffService.get(staffId);
-			response = Response.ok(staff).status(Response.Status.OK).build();
-		} catch (NoResultException nre) {
-			response = Response.status(Response.Status.NOT_FOUND)
-					.entity("Entity Not Found").build();
-		}
+		Staff staff = this.staffService.get(staffId);
+		response = Response.ok(staff).status(Response.Status.OK).build();
 
 		return response;
 	}

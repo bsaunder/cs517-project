@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -228,13 +227,8 @@ public class ResourceApi {
 
 		Response response;
 
-		try {
 			this.resourceService.delete(resourceId);
 			response = Response.ok().status(Response.Status.OK).build();
-		} catch (NoResultException nre) {
-			response = Response.status(Response.Status.NOT_FOUND)
-					.entity("Entity Not Found").build();
-		}
 
 		return response;
 	}
@@ -258,13 +252,8 @@ public class ResourceApi {
 
 		Response response;
 
-		try {
 			Resource resource = this.resourceService.get(resourceId);
 			response = Response.ok(resource).status(Response.Status.OK).build();
-		} catch (NoResultException nre) {
-			response = Response.status(Response.Status.NOT_FOUND)
-					.entity("Entity Not Found").build();
-		}
 
 		return response;
 	}
