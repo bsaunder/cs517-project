@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -143,19 +144,14 @@ public class StaffApi {
 	}
 
 	/**
-	 * Adds Staff.
-	 * 
-	 * <ul>
-	 * <li>Status 201: Successful Staff Creation.</li>
-	 * <li>Status 400: Error Adding Staff.</li>
-	 * </ul>
+	 * Saves Staff.
 	 * 
 	 * @param staff
 	 *            Staff to Add
 	 * @return Saved Staff
 	 */
 	private Response saveStaff(final Staff staff) {
-		this.logger.trace("StaffApi.addStaff()");
+		this.logger.trace("StaffApi.saveStaff()");
 
 		Response response;
 
@@ -309,9 +305,13 @@ public class StaffApi {
 
 		Response response;
 
-		// Does this need Error Handling If the ID Is Not Found?
-		this.staffService.delete(staffId);
-		response = Response.ok().status(Response.Status.OK).build();
+		try {
+			this.staffService.delete(staffId);
+			response = Response.ok().status(Response.Status.OK).build();
+		} catch (NoResultException nre) {
+			response = Response.status(Response.Status.NOT_FOUND)
+					.entity("Entity Not Found").build();
+		}
 
 		return response;
 	}
@@ -335,12 +335,12 @@ public class StaffApi {
 
 		Response response;
 
-		Staff staff = this.staffService.get(staffId);
-		if (staff != null) {
+		try {
+			Staff staff = this.staffService.get(staffId);
 			response = Response.ok(staff).status(Response.Status.OK).build();
-		} else {
+		} catch (NoResultException nre) {
 			response = Response.status(Response.Status.NOT_FOUND)
-					.entity("No Results Found").build();
+					.entity("Entity Not Found").build();
 		}
 
 		return response;
@@ -357,7 +357,6 @@ public class StaffApi {
 
 		Response response;
 
-		// Does this need Error Handling If the ID Is Not Found?
 		this.staffService.createTest();
 		response = Response.ok().status(Response.Status.OK).build();
 

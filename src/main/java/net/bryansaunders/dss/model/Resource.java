@@ -22,7 +22,7 @@ public class Resource extends BaseEntity {
 	 */
 	@NotNull
 	private String name;
-	
+
 	/**
 	 * Resource Address.
 	 */
@@ -46,6 +46,25 @@ public class Resource extends BaseEntity {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Get the address.
+	 * 
+	 * @return the address
+	 */
+	public Address getAddress() {
+		return this.address;
+	}
+
+	/**
+	 * Set the address.
+	 * 
+	 * @param address
+	 *            the address to set
+	 */
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 }
