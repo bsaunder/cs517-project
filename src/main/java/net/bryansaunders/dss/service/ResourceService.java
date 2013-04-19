@@ -97,25 +97,5 @@ public class ResourceService {
 
 		return this.dao.get(resourceId);
 	}
-	
-	/**
-	 * Creates a Test ShopKeeper.
-	 */
-	// TODO Remove Test Method
-	public void createTest() {
-		Classroom classroom = new Classroom();
-		classroom.setName("Class One");
-		classroom.setMaxStudents(10);
-		
-		Address address = new Address();
-		address.setCity("Charleston");
-		address.setState("SC");
-		address.setLine1("123 Main Street");
-		address.setLine2("Unit 5");
-		address.setZip("12345");
-		classroom.setAddress(address);
-		
-		this.dao.save(classroom);
-	}
 
 }

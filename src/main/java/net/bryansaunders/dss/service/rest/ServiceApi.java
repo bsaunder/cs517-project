@@ -61,7 +61,15 @@ public class ServiceApi {
 	@POST
 	@Path("add/travel")
 	public Response addTravel(final Travel travel) {
-		return this.saveService(travel);
+		this.logger.trace("ServiceApi.saveService()");
+
+		Response response;
+
+		Service savedService = this.serviceService.schedule(travel);
+		response = Response.ok(savedService).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -79,7 +87,15 @@ public class ServiceApi {
 	@PUT
 	@Path("update/travel")
 	public Response updateTravel(final Travel travel) {
-		return this.saveService(travel);
+		this.logger.trace("ServiceApi.updateTravel()");
+
+		Response response;
+
+		Service savedService = this.serviceService.save(travel);
+		response = Response.ok(savedService).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -97,7 +113,15 @@ public class ServiceApi {
 	@POST
 	@Path("add/training")
 	public Response addTraining(final Training training) {
-		return this.saveService(training);
+		this.logger.trace("ServiceApi.addTraining()");
+
+		Response response;
+
+		Service savedService = this.serviceService.schedule(training);
+		response = Response.ok(savedService).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -115,7 +139,15 @@ public class ServiceApi {
 	@PUT
 	@Path("update/training")
 	public Response updateTraining(final Training training) {
-		return this.saveService(training);
+		this.logger.trace("ServiceApi.updateTraining()");
+
+		Response response;
+
+		Service savedService = this.serviceService.save(training);
+		response = Response.ok(savedService).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -133,7 +165,15 @@ public class ServiceApi {
 	@POST
 	@Path("add/charter")
 	public Response addCharter(final Charter charter) {
-		return this.saveService(charter);
+		this.logger.trace("ServiceApi.addCharter()");
+
+		Response response;
+
+		Service savedService = this.serviceService.schedule(charter);
+		response = Response.ok(savedService).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -151,22 +191,11 @@ public class ServiceApi {
 	@PUT
 	@Path("update/charter")
 	public Response updateCharter(final Charter charter) {
-		return this.saveService(charter);
-	}
-
-	/**
-	 * Saves Service.
-	 * 
-	 * @param resource
-	 *            Service to Save
-	 * @return Saved Service
-	 */
-	private Response saveService(final Service resource) {
-		this.logger.trace("ServiceApi.saveService()");
+		this.logger.trace("ServiceApi.updateCharter()");
 
 		Response response;
 
-		Service savedService = this.serviceService.save(resource);
+		Service savedService = this.serviceService.save(charter);
 		response = Response.ok(savedService).status(Response.Status.CREATED)
 				.build();
 
@@ -248,23 +277,6 @@ public class ServiceApi {
 
 		Service service = this.serviceService.get(serviceId);
 		response = Response.ok(service).status(Response.Status.OK).build();
-
-		return response;
-	}
-
-	/**
-	 * Creates a Test ShopKeeper.
-	 */
-	// TODO Remove Test Method
-	@GET
-	@Path("create")
-	public Response createTest() {
-		this.logger.trace("ServiceApi.createTest()");
-
-		Response response;
-
-		this.serviceService.createTest();
-		response = Response.ok().status(Response.Status.OK).build();
 
 		return response;
 	}

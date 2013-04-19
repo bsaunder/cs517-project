@@ -61,7 +61,15 @@ public class ResourceApi {
 	@POST
 	@Path("add/classroom")
 	public Response addClassroom(final Classroom classroom) {
-		return this.saveResource(classroom);
+		this.logger.trace("ResourceApi.saveResource()");
+
+		Response response;
+
+		Resource savedResource = this.resourceService.save(classroom);
+		response = Response.ok(savedResource).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -79,7 +87,15 @@ public class ResourceApi {
 	@POST
 	@Path("add/trainingpool")
 	public Response addTrainingPool(final TrainingPool trainingPool) {
-		return this.saveResource(trainingPool);
+		this.logger.trace("ResourceApi.saveResource()");
+
+		Response response;
+
+		Resource savedResource = this.resourceService.save(trainingPool);
+		response = Response.ok(savedResource).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -97,7 +113,15 @@ public class ResourceApi {
 	@POST
 	@Path("add/boat")
 	public Response addBoat(final Boat boat) {
-		return this.saveResource(boat);
+		this.logger.trace("ResourceApi.saveResource()");
+
+		Response response;
+
+		Resource savedResource = this.resourceService.save(boat);
+		response = Response.ok(savedResource).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -115,7 +139,15 @@ public class ResourceApi {
 	@PUT
 	@Path("update/boat")
 	public Response updateBoat(final Boat boat) {
-		return this.saveResource(boat);
+		this.logger.trace("ResourceApi.saveResource()");
+
+		Response response;
+
+		Resource savedResource = this.resourceService.save(boat);
+		response = Response.ok(savedResource).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -133,7 +165,15 @@ public class ResourceApi {
 	@PUT
 	@Path("update/classroom")
 	public Response updateClassroom(final Classroom classroom) {
-		return this.saveResource(classroom);
+		this.logger.trace("ResourceApi.saveResource()");
+
+		Response response;
+
+		Resource savedResource = this.resourceService.save(classroom);
+		response = Response.ok(savedResource).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -151,22 +191,11 @@ public class ResourceApi {
 	@PUT
 	@Path("update/trainingpool")
 	public Response updateTrainingPool(final TrainingPool trainingPool) {
-		return this.saveResource(trainingPool);
-	}
-
-	/**
-	 * Saves Resource.
-	 * 
-	 * @param resource
-	 *            Resource to Add
-	 * @return Saved Resource
-	 */
-	private Response saveResource(final Resource resource) {
 		this.logger.trace("ResourceApi.saveResource()");
 
 		Response response;
 
-		Resource savedResource = this.resourceService.save(resource);
+		Resource savedResource = this.resourceService.save(trainingPool);
 		response = Response.ok(savedResource).status(Response.Status.CREATED)
 				.build();
 
@@ -248,23 +277,6 @@ public class ResourceApi {
 
 		Resource resource = this.resourceService.get(resourceId);
 		response = Response.ok(resource).status(Response.Status.OK).build();
-
-		return response;
-	}
-
-	/**
-	 * Creates a Test ShopKeeper.
-	 */
-	// TODO Remove Test Method
-	@GET
-	@Path("create")
-	public Response createTest() {
-		this.logger.trace("ResourceApi.createTest()");
-
-		Response response;
-
-		this.resourceService.createTest();
-		response = Response.ok().status(Response.Status.OK).build();
 
 		return response;
 	}

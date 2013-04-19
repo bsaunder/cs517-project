@@ -10,7 +10,9 @@ import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 
 import net.bryansaunders.dss.dao.ServiceDao;
+import net.bryansaunders.dss.model.Charter;
 import net.bryansaunders.dss.model.Service;
+import net.bryansaunders.dss.model.Training;
 import net.bryansaunders.dss.model.Travel;
 import net.bryansaunders.dss.model.embeddable.Address;
 
@@ -101,6 +103,42 @@ public class ServiceService {
 	}
 
 	/**
+	 * Schedules Training.
+	 * 
+	 * @param training
+	 *            Training to Schedule
+	 * @return Scheduled Training
+	 */
+	public Service schedule(Training training) {
+		// TODO Schedule Training
+		return this.save(training);
+	}
+
+	/**
+	 * Schedules Charter.
+	 * 
+	 * @param charter
+	 *            Charter to Schedule
+	 * @return Scheduled Charter
+	 */
+	public Service schedule(Charter charter) {
+		// TODO Schedule Charter
+		return this.save(charter);
+	}
+
+	/**
+	 * Schedules Travel.
+	 * 
+	 * @param travel
+	 *            Travel to Schedule
+	 * @return Scheduled Travel
+	 */
+	public Service schedule(Travel travel) {
+		// TODO Schedule Travel
+		return this.save(travel);
+	}
+
+	/**
 	 * Creates a Test Travel.
 	 */
 	// TODO Remove Test Method
@@ -114,7 +152,9 @@ public class ServiceService {
 		travel.setStartDate(new Date());
 		travel.setMaxCustomers(10);
 		travel.setName("Test Travel");
-		
+
+		// TODO Set Staff
+
 		Address address = new Address();
 		address.setCity("Charleston");
 		address.setState("SC");
@@ -122,7 +162,7 @@ public class ServiceService {
 		address.setLine2("Unit 5");
 		address.setZip("12345");
 		travel.setAddress(address);
-		
+
 		this.dao.save(travel);
 
 	}

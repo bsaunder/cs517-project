@@ -101,26 +101,4 @@ public class StaffService {
 		
 		this.dao.delete(staffId);
 	}
-
-	/**
-	 * Creates a Test ShopKeeper.
-	 */
-	// TODO Remove Test Method
-	public void createTest() {
-		ShopKeeper staff = new ShopKeeper();
-		staff.setName("Test" + Math.random());
-		staff.setHomePhone("843-555-5567");
-		staff.setCellPhone("843-555-5568");
-		staff.setEmail("joe@smith.com");
-		
-		Address address = new Address();
-		address.setCity("Charleston");
-		address.setState("SC");
-		address.setLine1("123 Main Street");
-		address.setLine2("Unit 5");
-		address.setZip("12345");
-		staff.setAddress(address);
-		
-		this.dao.save(staff);
-	}
 }

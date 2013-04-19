@@ -66,7 +66,15 @@ public class StaffApi {
 	@POST
 	@Path("add/shopkeeper")
 	public Response addShopKeeper(final ShopKeeper shopKeeper) {
-		return saveStaff(shopKeeper);
+		this.logger.trace("StaffApi.saveStaff()");
+
+		Response response;
+
+		Staff savedStaff = this.staffService.save(shopKeeper);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -84,7 +92,15 @@ public class StaffApi {
 	@POST
 	@Path("add/diveMaster")
 	public Response addDiveMaster(final DiveMaster diveMaster) {
-		return saveStaff(diveMaster);
+		this.logger.trace("StaffApi.saveStaff()");
+
+		Response response;
+
+		Staff savedStaff = this.staffService.save(diveMaster);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -102,7 +118,15 @@ public class StaffApi {
 	@POST
 	@Path("add/instructor")
 	public Response addInstructor(final Instructor instructor) {
-		return saveStaff(instructor);
+		this.logger.trace("StaffApi.saveStaff()");
+
+		Response response;
+
+		Staff savedStaff = this.staffService.save(instructor);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -120,7 +144,15 @@ public class StaffApi {
 	@POST
 	@Path("add/captain")
 	public Response addCaptain(final Captain captain) {
-		return saveStaff(captain);
+		this.logger.trace("StaffApi.saveStaff()");
+
+		Response response;
+
+		Staff savedStaff = this.staffService.save(captain);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -138,22 +170,11 @@ public class StaffApi {
 	@POST
 	@Path("add/technician")
 	public Response addTechnician(final Technician tech) {
-		return saveStaff(tech);
-	}
-
-	/**
-	 * Saves Staff.
-	 * 
-	 * @param staff
-	 *            Staff to Add
-	 * @return Saved Staff
-	 */
-	private Response saveStaff(final Staff staff) {
 		this.logger.trace("StaffApi.saveStaff()");
 
 		Response response;
 
-		Staff savedStaff = this.staffService.save(staff);
+		Staff savedStaff = this.staffService.save(tech);
 		response = Response.ok(savedStaff).status(Response.Status.CREATED)
 				.build();
 
@@ -175,7 +196,15 @@ public class StaffApi {
 	@PUT
 	@Path("update/shopkeeper")
 	public Response updateShopKeeper(final ShopKeeper shopKeeper) {
-		return saveStaff(shopKeeper);
+		this.logger.trace("StaffApi.saveStaff()");
+
+		Response response;
+
+		Staff savedStaff = this.staffService.save(shopKeeper);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -193,7 +222,15 @@ public class StaffApi {
 	@PUT
 	@Path("update/diveMaster")
 	public Response updateDiveMaster(final DiveMaster diveMaster) {
-		return saveStaff(diveMaster);
+		this.logger.trace("StaffApi.saveStaff()");
+
+		Response response;
+
+		Staff savedStaff = this.staffService.save(diveMaster);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -211,7 +248,15 @@ public class StaffApi {
 	@PUT
 	@Path("update/instructor")
 	public Response updateInstructor(final Instructor instructor) {
-		return saveStaff(instructor);
+		this.logger.trace("StaffApi.saveStaff()");
+
+		Response response;
+
+		Staff savedStaff = this.staffService.save(instructor);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -229,7 +274,15 @@ public class StaffApi {
 	@PUT
 	@Path("update/captain")
 	public Response updateCaptain(final Captain captain) {
-		return saveStaff(captain);
+		this.logger.trace("StaffApi.saveStaff()");
+
+		Response response;
+
+		Staff savedStaff = this.staffService.save(captain);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -247,7 +300,15 @@ public class StaffApi {
 	@PUT
 	@Path("update/technician")
 	public Response updateTechnician(final Technician tech) {
-		return saveStaff(tech);
+		this.logger.trace("StaffApi.saveStaff()");
+
+		Response response;
+
+		Staff savedStaff = this.staffService.save(tech);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
+
+		return response;
 	}
 
 	/**
@@ -325,23 +386,6 @@ public class StaffApi {
 
 		Staff staff = this.staffService.get(staffId);
 		response = Response.ok(staff).status(Response.Status.OK).build();
-
-		return response;
-	}
-
-	/**
-	 * Creates a Test ShopKeeper.
-	 */
-	// TODO Remove Test Method
-	@GET
-	@Path("create")
-	public Response createTest() {
-		this.logger.trace("StaffApi.createTest()");
-
-		Response response;
-
-		this.staffService.createTest();
-		response = Response.ok().status(Response.Status.OK).build();
 
 		return response;
 	}
