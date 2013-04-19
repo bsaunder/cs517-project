@@ -280,4 +280,22 @@ public class ServiceApi {
 
 		return response;
 	}
+
+	/**
+	 * Creates a Test ShopKeeper.
+	 */
+	// TODO Remove Test Method
+	@GET
+	@Path("create")
+	public Response createTest() {
+		this.logger.trace("ServiceApi.createTest()");
+
+		Response response;
+
+		this.serviceService.createTest();
+		response = Response.ok().status(Response.Status.OK).build();
+
+		return response;
+	}
+
 }
