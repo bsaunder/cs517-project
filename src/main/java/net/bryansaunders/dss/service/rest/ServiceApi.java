@@ -29,7 +29,7 @@ import org.jboss.logging.Logger;
  * @author Bryan Saunders <btsaunde@gmail.com>
  * 
  */
-@Path("/resource")
+@Path("/service")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped

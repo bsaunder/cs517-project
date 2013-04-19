@@ -1,5 +1,6 @@
 package net.bryansaunders.dss.model;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -27,6 +28,7 @@ public class Resource extends BaseEntity {
 	 * Resource Address.
 	 */
 	@NotNull
+	@Embedded
 	private Address address;
 
 	/**

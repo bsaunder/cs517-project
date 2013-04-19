@@ -3,13 +3,16 @@
  */
 package net.bryansaunders.dss.model;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -41,11 +44,11 @@ public class Charter extends Service {
 	 * Charter Staff.
 	 */
 	@Size(min = 3, max = 3)
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	// TODO Has Instructor Constraint
 	// TODO Has Captain Constraint
 	// TODO Has DiveMaster Constraint
-	private List<Staff> staff;
+	private Set<Staff> staff = new HashSet<Staff>();
 
 	/**
 	 * Charter Boat.
@@ -78,7 +81,7 @@ public class Charter extends Service {
 	 * 
 	 * @return the staff
 	 */
-	public List<Staff> getStaff() {
+	public Set<Staff> getStaff() {
 		return this.staff;
 	}
 
@@ -88,7 +91,7 @@ public class Charter extends Service {
 	 * @param staff
 	 *            the staff to set
 	 */
-	public void setStaff(List<Staff> staff) {
+	public void setStaff(Set<Staff> staff) {
 		this.staff = staff;
 	}
 

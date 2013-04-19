@@ -3,9 +3,11 @@
  */
 package net.bryansaunders.dss.model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,9 +31,9 @@ public class Travel extends Service {
 	 * Travel Guides.
 	 */
 	@Size(min = 1)
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	// TODO Has Instructor Constraint
-	private List<Staff> staff;
+	private Set<Staff> staff = new HashSet<Staff>();
 
 	/**
 	 * Destination Description.
@@ -81,7 +83,7 @@ public class Travel extends Service {
 	 * 
 	 * @return the staff
 	 */
-	public List<Staff> getStaff() {
+	public Set<Staff> getStaff() {
 		return this.staff;
 	}
 
@@ -91,7 +93,7 @@ public class Travel extends Service {
 	 * @param staff
 	 *            the staff to set
 	 */
-	public void setStaff(List<Staff> staff) {
+	public void setStaff(Set<Staff> staff) {
 		this.staff = staff;
 	}
 

@@ -2,6 +2,7 @@ package net.bryansaunders.dss.model;
 
 import java.util.Date;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -58,6 +59,7 @@ public abstract class Service extends BaseEntity {
 	 * Location of Service.
 	 */
 	@NotNull
+	@Embedded
 	private Address address;
 
 	/**
