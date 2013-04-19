@@ -5,7 +5,6 @@ package net.bryansaunders.dss.service.rest;
 
 import java.util.List;
 
-import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -154,14 +153,9 @@ public class StaffApi {
 
 		Response response;
 
-		try {
-			Staff savedStaff = this.staffService.save(staff);
-			response = Response.ok(savedStaff).status(Response.Status.CREATED)
-					.build();
-		} catch (final EJBException e) {
-			response = Response.status(Response.Status.BAD_REQUEST)
-					.entity("JSON Invalid: " + e.getMessage()).build();
-		}
+		Staff savedStaff = this.staffService.save(staff);
+		response = Response.ok(savedStaff).status(Response.Status.CREATED)
+				.build();
 
 		return response;
 	}

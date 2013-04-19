@@ -2,7 +2,6 @@ package net.bryansaunders.dss.service.rest;
 
 import java.util.List;
 
-import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -167,14 +166,9 @@ public class ResourceApi {
 
 		Response response;
 
-		try {
-			Resource savedResource = this.resourceService.save(resource);
-			response = Response.ok(savedResource)
-					.status(Response.Status.CREATED).build();
-		} catch (final EJBException e) {
-			response = Response.status(Response.Status.BAD_REQUEST)
-					.entity("JSON Invalid: " + e.getMessage()).build();
-		}
+		Resource savedResource = this.resourceService.save(resource);
+		response = Response.ok(savedResource).status(Response.Status.CREATED)
+				.build();
 
 		return response;
 	}
@@ -227,8 +221,8 @@ public class ResourceApi {
 
 		Response response;
 
-			this.resourceService.delete(resourceId);
-			response = Response.ok().status(Response.Status.OK).build();
+		this.resourceService.delete(resourceId);
+		response = Response.ok().status(Response.Status.OK).build();
 
 		return response;
 	}
@@ -252,8 +246,8 @@ public class ResourceApi {
 
 		Response response;
 
-			Resource resource = this.resourceService.get(resourceId);
-			response = Response.ok(resource).status(Response.Status.OK).build();
+		Resource resource = this.resourceService.get(resourceId);
+		response = Response.ok(resource).status(Response.Status.OK).build();
 
 		return response;
 	}
