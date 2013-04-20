@@ -3,21 +3,16 @@
  */
 package net.bryansaunders.dss.model;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -41,14 +36,25 @@ public class Charter extends Service {
 	private List<String> siteNames = new LinkedList<String>();
 
 	/**
-	 * Charter Staff.
+	 * Charter Captain.
 	 */
-	@Size(min = 3, max = 3)
-	@OneToMany(fetch = FetchType.EAGER)
-	// TODO Has Instructor Constraint
-	// TODO Has Captain Constraint
-	// TODO Has DiveMaster Constraint
-	private Set<Staff> staff = new HashSet<Staff>();
+	@NotNull
+	@OneToOne
+	private Captain captain;
+
+	/**
+	 * Charter Instructor.
+	 */
+	@NotNull
+	@OneToOne
+	private Instructor instructor;
+
+	/**
+	 * Charter DiveMaster.
+	 */
+	@NotNull
+	@OneToOne
+	private DiveMaster diveMaster;
 
 	/**
 	 * Charter Boat.
@@ -77,25 +83,6 @@ public class Charter extends Service {
 	}
 
 	/**
-	 * Get the staff.
-	 * 
-	 * @return the staff
-	 */
-	public Set<Staff> getStaff() {
-		return this.staff;
-	}
-
-	/**
-	 * Set the staff.
-	 * 
-	 * @param staff
-	 *            the staff to set
-	 */
-	public void setStaff(Set<Staff> staff) {
-		this.staff = staff;
-	}
-
-	/**
 	 * Get the boat.
 	 * 
 	 * @return the boat
@@ -112,6 +99,63 @@ public class Charter extends Service {
 	 */
 	public void setBoat(Boat boat) {
 		this.boat = boat;
+	}
+
+	/**
+	 * Get the captain.
+	 * 
+	 * @return the captain
+	 */
+	public Captain getCaptain() {
+		return this.captain;
+	}
+
+	/**
+	 * Set the captain.
+	 * 
+	 * @param captain
+	 *            the captain to set
+	 */
+	public void setCaptain(Captain captain) {
+		this.captain = captain;
+	}
+
+	/**
+	 * Get the instructor.
+	 * 
+	 * @return the instructor
+	 */
+	public Instructor getInstructor() {
+		return this.instructor;
+	}
+
+	/**
+	 * Set the instructor.
+	 * 
+	 * @param instructor
+	 *            the instructor to set
+	 */
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
+	}
+
+	/**
+	 * Get the diveMaster.
+	 * 
+	 * @return the diveMaster
+	 */
+	public DiveMaster getDiveMaster() {
+		return this.diveMaster;
+	}
+
+	/**
+	 * Set the diveMaster.
+	 * 
+	 * @param diveMaster
+	 *            the diveMaster to set
+	 */
+	public void setDiveMaster(DiveMaster diveMaster) {
+		this.diveMaster = diveMaster;
 	}
 
 }
