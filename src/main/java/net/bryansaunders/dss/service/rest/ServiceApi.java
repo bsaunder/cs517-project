@@ -38,7 +38,7 @@ public class ServiceApi {
 	/**
 	 * Logger.
 	 */
-	private final Logger logger = Logger.getLogger(StaffApi.class);
+	private final Logger logger = Logger.getLogger(ServiceApi.class);
 
 	/**
 	 * Resource Service
@@ -277,23 +277,6 @@ public class ServiceApi {
 
 		Service service = this.serviceService.get(serviceId);
 		response = Response.ok(service).status(Response.Status.OK).build();
-
-		return response;
-	}
-
-	/**
-	 * Creates a Test ShopKeeper.
-	 */
-	// TODO Remove Test Method
-	@GET
-	@Path("create")
-	public Response createTest() {
-		this.logger.trace("ServiceApi.createTest()");
-
-		Response response;
-
-		this.serviceService.createTest();
-		response = Response.ok().status(Response.Status.OK).build();
 
 		return response;
 	}

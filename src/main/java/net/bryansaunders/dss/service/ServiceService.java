@@ -1,6 +1,5 @@
 package net.bryansaunders.dss.service;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,12 +8,14 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 
+import net.bryansaunders.dss.dao.CharterDao;
 import net.bryansaunders.dss.dao.ServiceDao;
+import net.bryansaunders.dss.dao.TrainingDao;
+import net.bryansaunders.dss.dao.TravelDao;
 import net.bryansaunders.dss.model.Charter;
 import net.bryansaunders.dss.model.Service;
 import net.bryansaunders.dss.model.Training;
 import net.bryansaunders.dss.model.Travel;
-import net.bryansaunders.dss.model.embeddable.Address;
 
 import org.jboss.logging.Logger;
 
@@ -30,13 +31,37 @@ public class ServiceService {
 	/**
 	 * Logger.
 	 */
-	private final Logger logger = Logger.getLogger(StaffService.class);
+	private final Logger logger = Logger.getLogger(ServiceService.class);
 
 	/**
-	 * Staff DAO.
+	 * Charter DAO.
 	 */
 	@Inject
-	private ServiceDao dao;
+	private CharterDao charterDao;
+
+	/**
+	 * Travel DAO.
+	 */
+	@Inject
+	private TravelDao travelDao;
+
+	/**
+	 * Training DAO.
+	 */
+	@Inject
+	private TrainingDao trainingDao;
+
+	/**
+	 * Service DAO.
+	 */
+	@Inject
+	private ServiceDao serviceDao;
+
+	/**
+	 * Schedule Service
+	 */
+	@Inject
+	private ScheduleService scheduleService;
 
 	/**
 	 * EJB Context for Transaction Rollback.
@@ -45,19 +70,63 @@ public class ServiceService {
 	private EJBContext context;
 
 	/**
-	 * Saves the Given Service.
+	 * Saves the Given Training.
 	 * 
 	 * @param service
-	 *            Service to Save.
-	 * @return Saved Service
+	 *            Training to Save.
+	 * @return Saved Training
 	 */
-	public Service save(Service service) {
+	public Service save(Training service) {
 		this.logger.trace("ServiceService.save()");
 
 		Service savedResource = null;
 
 		try {
-			savedResource = this.dao.save(service);
+			savedResource = this.trainingDao.save(service);
+		} catch (ConstraintViolationException e) {
+			this.context.setRollbackOnly();
+			throw e;
+		}
+
+		return savedResource;
+	}
+
+	/**
+	 * Saves the Given Charter.
+	 * 
+	 * @param service
+	 *            Charter to Save.
+	 * @return Saved Charter
+	 */
+	public Service save(Charter service) {
+		this.logger.trace("ServiceService.save()");
+
+		Service savedResource = null;
+
+		try {
+			savedResource = this.charterDao.save(service);
+		} catch (ConstraintViolationException e) {
+			this.context.setRollbackOnly();
+			throw e;
+		}
+
+		return savedResource;
+	}
+
+	/**
+	 * Saves the Given Travel.
+	 * 
+	 * @param service
+	 *            Travel to Save.
+	 * @return Saved Travel
+	 */
+	public Service save(Travel service) {
+		this.logger.trace("ServiceService.save()");
+
+		Service savedResource = null;
+
+		try {
+			savedResource = this.travelDao.save(service);
 		} catch (ConstraintViolationException e) {
 			this.context.setRollbackOnly();
 			throw e;
@@ -74,7 +143,7 @@ public class ServiceService {
 	public List<Service> getAll() {
 		this.logger.trace("ServiceService.getAll()");
 
-		return this.dao.getAll();
+		return this.serviceDao.getAll();
 	}
 
 	/**
@@ -86,7 +155,7 @@ public class ServiceService {
 	public void delete(Integer serviceId) {
 		this.logger.trace("ServiceService.delete()");
 
-		this.dao.delete(serviceId);
+		this.serviceDao.delete(serviceId);
 	}
 
 	/**
@@ -99,7 +168,7 @@ public class ServiceService {
 	public Service get(Integer serviceId) {
 		this.logger.trace("ServiceService.get()");
 
-		return this.dao.get(serviceId);
+		return this.serviceDao.get(serviceId);
 	}
 
 	/**
@@ -134,37 +203,8 @@ public class ServiceService {
 	 * @return Scheduled Travel
 	 */
 	public Service schedule(Travel travel) {
-		// TODO Schedule Travel
+		travel = this.scheduleService.scheduleTravel(travel);
 		return this.save(travel);
-	}
-
-	/**
-	 * Creates a Test Travel.
-	 */
-	// TODO Remove Test Method
-	public void createTest() {
-		Travel travel = new Travel();
-		travel.setCost(5000);
-		travel.setDescription("Fun Travel!");
-		travel.setDestinationDesc("Tropical Island");
-		travel.setDestinationName("Little Cayman");
-		travel.setEndDate(new Date());
-		travel.setStartDate(new Date());
-		travel.setMaxCustomers(10);
-		travel.setName("Test Travel");
-
-		// TODO Set Staff
-
-		Address address = new Address();
-		address.setCity("Charleston");
-		address.setState("SC");
-		address.setLine1("123 Main Street");
-		address.setLine2("Unit 5");
-		address.setZip("12345");
-		travel.setAddress(address);
-
-		this.dao.save(travel);
-
 	}
 
 }

@@ -38,7 +38,7 @@ public class ResourceApi {
 	/**
 	 * Logger.
 	 */
-	private final Logger logger = Logger.getLogger(StaffApi.class);
+	private final Logger logger = Logger.getLogger(ResourceApi.class);
 
 	/**
 	 * Resource Service

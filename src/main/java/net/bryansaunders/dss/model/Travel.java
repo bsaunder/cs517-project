@@ -32,8 +32,7 @@ public class Travel extends Service {
 	 */
 	@Size(min = 1)
 	@OneToMany(fetch = FetchType.EAGER)
-	// TODO Has Instructor Constraint
-	private Set<Staff> staff = new HashSet<Staff>();
+	private Set<Instructor> instructors = new HashSet<Instructor>();
 
 	/**
 	 * Destination Description.
@@ -79,22 +78,22 @@ public class Travel extends Service {
 	}
 
 	/**
-	 * Get the staff.
+	 * Get the instructors.
 	 * 
-	 * @return the staff
+	 * @return the instructors
 	 */
-	public Set<Staff> getStaff() {
-		return this.staff;
+	public Set<Instructor> getInstructors() {
+		return this.instructors;
 	}
 
 	/**
-	 * Set the staff.
+	 * Set the instructors.
 	 * 
-	 * @param staff
-	 *            the staff to set
+	 * @param instructors
+	 *            the instructors to set
 	 */
-	public void setStaff(Set<Staff> staff) {
-		this.staff = staff;
+	public void setInstructors(Set<Instructor> instructors) {
+		this.instructors = instructors;
 	}
 
 }
