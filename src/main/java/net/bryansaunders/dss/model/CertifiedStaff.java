@@ -10,6 +10,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.validation.constraints.Size;
 
 import net.bryansaunders.dss.model.embeddable.Certification;
 
@@ -31,5 +32,6 @@ public abstract class CertifiedStaff extends Staff {
 	@ElementCollection
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@CollectionTable(name = "certification", joinColumns = @JoinColumn(name = "staff_id", referencedColumnName = "id"))
+	@Size(min = 1)
 	List<Certification> certifications = new LinkedList<Certification>();
 }

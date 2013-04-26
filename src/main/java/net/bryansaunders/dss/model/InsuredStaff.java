@@ -10,6 +10,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.validation.constraints.Size;
 
 import net.bryansaunders.dss.model.embeddable.Insurance;
 
@@ -20,7 +21,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  * Insured Staff Super Class.
  * 
  * @author Bryan Saunders <btsaunde@gmail.com>
- *
+ * 
  */
 @Entity
 public abstract class InsuredStaff extends CertifiedStaff {
@@ -31,5 +32,6 @@ public abstract class InsuredStaff extends CertifiedStaff {
 	@ElementCollection
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@CollectionTable(name = "insurance", joinColumns = @JoinColumn(name = "staff_id", referencedColumnName = "id"))
+	@Size(min = 1)
 	List<Insurance> insurance = new LinkedList<Insurance>();
 }

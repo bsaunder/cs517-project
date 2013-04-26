@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -33,8 +34,13 @@ public class Charter extends Service {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@CollectionTable(name = "siteName", joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"))
 	@Column(name = "siteNames")
+	@Size(min = 1)
 	private List<String> siteNames = new LinkedList<String>();
 
+	/*
+	 * Charter Should have 3 Staff, One each of DiveMaster, Captain, and Instructor.
+	 */
+	
 	/**
 	 * Charter Captain.
 	 */

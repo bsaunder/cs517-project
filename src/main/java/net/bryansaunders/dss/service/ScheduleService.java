@@ -11,7 +11,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import net.bryansaunders.dss.dao.InstructorDao;
+import net.bryansaunders.dss.model.Charter;
 import net.bryansaunders.dss.model.Instructor;
+import net.bryansaunders.dss.model.Training;
 import net.bryansaunders.dss.model.Travel;
 
 import org.jboss.logging.Logger;
@@ -49,17 +51,43 @@ public class ScheduleService {
 		Set<Instructor> instructorSet = new HashSet<Instructor>();
 
 		// Find Instructor
-		// TODO Add GetAvailable to DAO and Update
-		// TODO If Staff Set, Do Not Change
-		List<Instructor> instructorList = this.instructorDao.getAll();
-		if (!instructorList.isEmpty()) {
-			instructorSet.add(instructorList.get(0));
-		}
+		Set<Instructor> instructors = travel.getInstructors();
+		if (instructors == null || instructors.isEmpty()) {
+			List<Instructor> instructorList = this.instructorDao.getAvailable(travel.getStartDate(),
+					travel.getEndDate());
+			if (!instructorList.isEmpty()) {
+				instructorSet.add(instructorList.get(0));
+			}
 
-		// Assign Instructor
-		travel.setInstructors(instructorSet);
+			// Assign Instructor
+			travel.setInstructors(instructorSet);
+		}
 
 		// Return Travel
 		return travel;
+	}
+
+	/**
+	 * Schedules the Given Charter.
+	 * 
+	 * @param charter
+	 *            Charter to Schedule.
+	 * @return Scheduled Charter.
+	 */
+	public Charter scheduleCharter(final Charter charter) {
+		// TODO Implement Schedule Logic
+		return charter;
+	}
+
+	/**
+	 * Schedules the Given Training.
+	 * 
+	 * @param training
+	 *            Training to Schedule.
+	 * @return Scheduled Training.
+	 */
+	public Training scheduleTraining(final Training training) {
+		// TODO Implement Schedule Logic
+		return training;
 	}
 }

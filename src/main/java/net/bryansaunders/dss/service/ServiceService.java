@@ -179,7 +179,7 @@ public class ServiceService {
 	 * @return Scheduled Training
 	 */
 	public Service schedule(Training training) {
-		// TODO Schedule Training
+		training = this.scheduleService.scheduleTraining(training);
 		return this.save(training);
 	}
 
@@ -191,7 +191,7 @@ public class ServiceService {
 	 * @return Scheduled Charter
 	 */
 	public Service schedule(Charter charter) {
-		// TODO Schedule Charter
+		charter = this.scheduleService.scheduleCharter(charter);
 		return this.save(charter);
 	}
 
