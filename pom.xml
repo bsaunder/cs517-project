@@ -181,7 +181,7 @@
 			</plugin>
 			
 			<!-- Enunciate -->
-			<plugin>
+			<!--<plugin>
 				<groupId>org.codehaus.enunciate</groupId>
 				<artifactId>maven-enunciate-plugin</artifactId>
 				<version>1.25</version>
@@ -197,7 +197,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 
 		</plugins>
 	</build>
